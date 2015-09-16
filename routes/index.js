@@ -1,9 +1,20 @@
 var express = require('express');
+var superagent = require('superagent');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	superagent.get("http://www.myapifilms.com/imdb/top")
+		.query({
+			end: 250,
+			data: 'S'
+		})
+		.set({ Accept: 'application/json' })
+		.end(function(e, imdb) {
+			if (e) next(e);
+			var rankData = imdb.body;
+			res.render('index', { content: JSON.stringify(rankData) });
+		});
 });
 
 module.exports = router;
