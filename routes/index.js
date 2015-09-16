@@ -7,13 +7,13 @@ router.get('/', function(req, res, next) {
 	superagent.get("http://www.myapifilms.com/imdb/top")
 		.query({
 			end: 250,
-			data: 'S'
+			data: 'F'
 		})
 		.set({ Accept: 'application/json' })
 		.end(function(e, imdb) {
 			if (e) next(e);
 			var rankData = imdb.body;
-			res.render('index', { content: JSON.stringify(rankData) });
+			res.render('index', { content: rankData });
 		});
 });
 
