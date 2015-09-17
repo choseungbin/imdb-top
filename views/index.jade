@@ -1,15 +1,16 @@
 extends layout
 
 block content
-	ol
+	ol.media-list
 		each movie in content
-			li= movie.originalTitle
-			ul
-				li
-					img(src=movie.urlPoster, alt=movie.title)
-				li= movie.idIMDB
-				li= movie.rating
-				li= movie.year
-				li= movie.simplePlot
-				li= releaseDate
-				li= metascore
+			li.media
+				div.media-left
+					img(src=movie.urlPoster, alt=movie.title, width='107', height='159')
+				div.media-body
+					h4.media-heading: strong= movie.ranking + ' ' + movie.title
+					p= movie.idIMDB
+					p= movie.rating
+					p= movie.year
+					p= movie.simplePlot
+					p= movie.releaseDate
+					p= movie.metascore
